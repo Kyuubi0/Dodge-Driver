@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-	[SerializeField] private bool X;
-    // Start is called before the first frame update
-    void Start()
-    {
-        print(X);
-        Debug.Log("uwu");
-        print("uwu2");
-    }
+    public Rigidbody rb;
 
-    // Update is called once per frame
-    void Update()
+    public float forwardForce=2000f,sidewaysForce=500f;
+    
+    // FixedUpdate is for physics
+    void FixedUpdate()
     {
-		Debug.Log("uwu3");
-		print("uwu4");
-	}
+        rb.AddForce(0, 0, forwardForce * Time.deltaTime);
+
+        if (Input.GetKey("d"))
+        {
+            rb.AddForce(sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+        }
+        if(Input.GetKey("a")) 
+        {
+            rb.AddForce(-sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+        }
+    }
 }
